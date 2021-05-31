@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>Gerar arquivo únivo com várias páginas</title>
 
 <!-- Jquery -->
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 
     <div class="form">
 
-        <h1>Informe o diretório a ser convertido</h1>
+        <h1>Gerar arquivo únivo com várias páginas</h1>
 
         <div class="form-wrap">
 
@@ -46,6 +46,7 @@
                     <option value="">Extensão</option>
                     <option value=".pdf">PDF</option>
                     <option value=".tiff">TIFF</option>
+                    <option value=".png">PNG</option>
                 </select> 
             </label> 
             
@@ -69,7 +70,7 @@
 
             <br/><br/>
 
-            <button type="button" onclick="convertDir()" class="send-image" style="width:100%">Converter Imagens</button>
+            <button type="button" onclick="convertDir('convertDir.php')" class="send-image" style="width:100%">Converter Imagens</button>
 
         </div>
 

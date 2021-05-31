@@ -161,12 +161,13 @@ function convertImage(){
 
 
 /** Converte um diretório selecionado */
-function convertDir(){
+function convertDir(url){
 
     var dirOrigin  = $('input[name="dir-origin"]').val();
     var dirDestiny = $('input[name="dir-destiny"]').val();
     var extension  = $('select[name="extension"]').val();
-    var quality    = $('select[name="quality"]').val();    
+    var quality    = $('select[name="quality"]').val();
+    var fileSize   = $('input[name="file-size"]').val();
 
     if(dirOrigin) {//Verifica se o diretório de origem foi informado
 
@@ -193,10 +194,10 @@ function convertDir(){
                     $.ajax({
 
                         /** Dados para envio */
-                        url : 'convertDir.php',
+                        url : url,
                         type : 'post',
                         dataType : 'json',
-                        data : 'dirOrigin='+dirOrigin+'&dirDestiny='+dirDestiny+'&extension='+extension+'&quality='+quality,
+                        data : 'dirOrigin='+dirOrigin+'&dirDestiny='+dirDestiny+'&extension='+extension+'&quality='+quality+'&fileSize='+fileSize,
                 
                         /** Caso tenha sucesso */
                         success: function(response) {

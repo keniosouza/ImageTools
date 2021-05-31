@@ -18,6 +18,12 @@ class ImageTools{
     private $origem = null;
     private $destino = null;
     private $command = null;
+    private $font = null;
+    private $nameFile = null;
+    private $width = null;
+    private $height = null;
+    private $guidance = null;
+    private $fileSize = null;
     
     /** Caminho absoluto do imageMagick */
     private $imageMagick = "cmd /c C:\\ImageMagick\\magick.exe";
@@ -56,16 +62,37 @@ class ImageTools{
 
         /** Executa o comando de converter o arquivo */
         exec($this->command);
-        
-        /** Comando utilizado */
-        //magick convert *.jpg -resize 80% -compress lzw output.tif        
+           
     }
 
+    /** Gera miniaturas e insere a marca d'água em imagens em um determinado diretório */
+    public function convertWaterMark(string $origem, string $destino, string $qualidade, string $nameFile, int $width, int $height, int $fileSize)
+    {
+        /** Parametros de entrada */
+        $this->origem = $origem;
+        $this->destino = $destino;
+        $this->qualidade = !empty($qualidade) ? "-resize ".$qualidade."%" : "";
+        $this->nameFile = $nameFile;
+        $this->font = "Arial";     
+        $this->width = $width;
+        $this->height = $height; 
+        $this->fileSize = $fileSize; 
+        $this->watermark = "img/watermark.png";
 
 
-    /** Comando para converte TIFF para PDF 
-     * magick mogrify -format pdf *.tiff
-    */
+        //Redimensiona a imagem e gera na pasta de destino       
+        $this->command = "{$this->imageMagick} {$this->origem} {$this->qualidade} -resize {$this->fileSize}x{$this->fileSize} -background Khaki label:{$this->nameFile} -gravity center -append {$this->destino}";
+
+        /** Executa o comando de converter o arquivo */
+        exec($this->command);
+
+        //Coloca a marca d' água
+        $this->command = "{$this->imageMagick} convert {$this->destino} {$this->watermark} -gravity center -composite {$this->destino}";
+
+        /** Executa o comando de converter o arquivo */
+        exec($this->command);        
+
+    }
 
     /** Destrutor da classe */
 	function __destruct(){}   
